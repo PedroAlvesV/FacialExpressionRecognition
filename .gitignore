@@ -1,3 +1,9 @@
+*.lnk
+other-stuff/
+weights/
+.tmp.drivedownload/
+sandbox.py
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

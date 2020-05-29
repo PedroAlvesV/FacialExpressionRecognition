@@ -10,7 +10,8 @@ import os
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
 from basemodels import VGGFace, OpenFace, Facenet, FbDeepFace
-from extendedmodels import Age, Gender, Race, Emotion
+# from extendedmodels import Age, Gender, Race, Emotion
+from extendedmodels import Emotion
 from commons import functions, realtime, distance as dst
 
 import paho.mqtt.client as mqtt
@@ -81,11 +82,11 @@ def analysis(db_path, model_name, distance_metric, enable_face_analysis = True):
 		emotion_model = Emotion.loadModel()
 		print("Emotion model loaded")
 		
-		age_model = Age.loadModel()
-		print("Age model loaded")
+		#age_model = Age.loadModel()
+		#print("Age model loaded")
 		
-		gender_model = Gender.loadModel()
-		print("Gender model loaded")
+		#gender_model = Gender.loadModel()
+		#print("Gender model loaded")
 		
 		toc = time.time()
 		
@@ -121,7 +122,7 @@ def analysis(db_path, model_name, distance_metric, enable_face_analysis = True):
 	
 	#-----------------------
 
-	time_threshold = 1; frame_threshold = 1
+	time_threshold = 4; frame_threshold = 4
 	pivot_img_size = 112 #face recognition result image
 
 	#-----------------------
@@ -301,10 +302,10 @@ def analysis(db_path, model_name, distance_metric, enable_face_analysis = True):
 							#-------------------------------
 							
 							face_224 = functions.detectFace(custom_face, (224, 224), False)
-							
+							"""
 							age_predictions = age_model.predict(face_224)[0,:]
 							apparent_age = Age.findApparentAge(age_predictions)
-						
+							
 							#-------------------------------
 							
 							gender_prediction = gender_model.predict(face_224)[0,:]
@@ -317,7 +318,7 @@ def analysis(db_path, model_name, distance_metric, enable_face_analysis = True):
 							#print(str(int(apparent_age))," years old ", dominant_emotion, " ", gender)
 							
 							analysis_report = str(int(apparent_age))+" "+gender
-							
+							"""
 							#-------------------------------
 							
 							info_box_color = (46,200,255)
